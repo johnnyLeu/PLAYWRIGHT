@@ -1,0 +1,2 @@
+- Before to run tests, we need to install PlayWright framework first, with command -> npx playwright install
+- After that run command to install all the dependencies used by the tests -> npm i
