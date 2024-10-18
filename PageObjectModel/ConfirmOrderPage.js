@@ -5,20 +5,36 @@ class ConfirmOrderPage {
     constructor(page) {
         this.page = page;
         this.thanks4order = page.getByText(" Thankyou for the order. ");
-        this.ordersId = page.locator('.em-spacer-1 .ng-star-inserted');
+        this.orderIds = page.locator('.em-spacer-1 .ng-star-inserted');
         this.orderHistoryBtn = page.getByText(" Orders History Page ");
         this.csvDwlBtn = page.getByText("Click To Download Order Details in CSV");
         this.exlDwlBtn = page.getByText("Click To Download Order Details in Excel");
     }
 
-    async checkOrdersId(ordersId) {
-        const count = await this.ordersId.count();
-        for(let i = 0; i < count; i++) {
-            const orderText = await this.ordersId.nth(i).textContent(); 
-            expect(orderText).toContain(ordersId[i]); 
+    async getOrderIds() {
+        await this.page.waitForSelector('.em-spacer-1 .ng-star-inserted');
+         const count = await this.orderIds.count();
+        const orderIdsArray = [];
+
+        for (let i = 0; i < count; i++) {
+            let orderId = await this.orderIds.nth(i).textContent();
+            orderId = orderId.replace(/[| ]/g, '').trim();  // Rimuove sia i delimitatori '|' che eventuali spazi
+            orderIdsArray.push(orderId);
         }
+
+        return orderIdsArray;
+
     }
 
+    async checkOrderIds(orderIds) {
+        const count = await this.orderIds.count();
+        for(let i = 0; i < count; i++) {
+            let orderText = await this.orderIds.nth(i).textContent();
+            orderText = orderText.replace(/[| ]/g, '').trim();  // Rimuove sia i delimitatori '|' che eventuali spazi
+            expect(orderIds).toContain(orderText);  
+        }
+    }    
+    
     async checkThanks() {
         await expect(this.thanks4order).toBeVisible();
     }
