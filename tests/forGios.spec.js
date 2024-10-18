@@ -61,7 +61,6 @@ test.describe("Check Google search", () => {
         }); 
           const giovanni = {"nome": "pippo"};
           await route.fulfill({response: response, body: giovanni});
-          await page.pause();
         });
 
         await page.waitForResponse("https://www.google.com/*")
