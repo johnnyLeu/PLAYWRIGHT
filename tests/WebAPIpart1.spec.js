@@ -1,6 +1,6 @@
 // REQUEST --> usato per WEB API TESTING
 const {test, expect, request} = require('@playwright/test'); 
-const {APIutils} = require('./Utils/APIutils');
+const {APIutils} = require('../Utils/APIutils');
 
 const loginPayload = {userEmail: "flameman19@gmail.com", userPassword: "Iamking@000"};
 const orderPayload = {orders: [{country: "Italy", productOrderedId: "6581ca979fd99c85e8ee7faf"}]};

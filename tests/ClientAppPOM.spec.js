@@ -1,44 +1,32 @@
 const {test, expect} = require('@playwright/test');  
-const {LoginPage} = require('../PageObjectModel/LoginPage');
-const {DashboardPage} = require('../PageObjectModel/DashboardPage');
-const {CartPage} = require('../PageObjectModel/CartPage');
-const {Navbar} = require('../PageObjectModel/Navbar');
-const {CheckoutPage} = require('../PageObjectModel/CheckoutPage');
-const {ConfirmOrderPage} = require('../PageObjectModel/ConfirmOrderPage');
-const {OrdersPage} = require('../PageObjectModel/OrdersPage');
+const {POManager} = require('../PageObjectModel/POManager');
+// Otteniamo i dati da un file esterno e lo convertiamo da file JSON ad oggetto JS 
+// JS OBJECT <- STRING <- JSON
+const dataOrder = JSON.parse(JSON.stringify(require("../Utils/PlaceOrderTestData.json")));
+const dataPayment = JSON.parse(JSON.stringify(require("../Utils/PaymentsData.json")));
 
 test.only('Raulshetty Client App Buy Products Playwright Test', async ({page}) => { 
-    const cartPage = new CartPage(page);
-    const loginPage = new LoginPage(page);
-    const dashboardPage = new DashboardPage(page);
-    const navbar = new Navbar(page);
-    const checkoutPage = new CheckoutPage(page);
-    const confirmOrderPage = new ConfirmOrderPage(page);
-    const ordersPage = new OrdersPage(page);
-
-    const email = "flameman19@gmail.com"; 
-    const passsword = "Iamking@000";
-    const zaraProduct = "ZARA COAT 3";
-    const productsArray = ["ADIDAS ORIGINAL", "ZARA COAT 3", "IPHONE 13 PRO"];
-    const creditCard = "1234 5678 9000 1908"; 
-    const cardMonth = "08";
-    const cardYear = "19";
-    const ccv = "000";
-    const nameOnCard = "Giovanni Di Pietrantonio";
-    const country = "Italy";  
+    const poManager = new POManager(page);
+    const cartPage = poManager.getCartPage();
+    const loginPage = poManager.getLoginPage(); 
+    const dashboardPage = poManager.getDashboardPage(); 
+    const navbar = poManager.getNavbar(); 
+    const checkoutPage = poManager.getCheckoutPage(); 
+    const confirmOrderPage = poManager.getConfirmOrderPage(); 
+    const ordersPage = poManager.getOrdersPage();
 
     await loginPage.goToLoginPage();
-    await loginPage.loginProcess(email, passsword);
+    await loginPage.loginProcess(dataOrder.email, dataOrder.passsword);
 
-    await dashboardPage.searchAddProduct(zaraProduct);
+    await dashboardPage.searchAddProduct(dataOrder.zaraProduct);
     await navbar.clickCartBtn();
 
-    await cartPage.checkProduct(zaraProduct);
+    await cartPage.checkProduct(dataOrder.zaraProduct);
     await cartPage.goToCheckout();
 
-    await checkoutPage.insertDataPayment(creditCard, cardMonth, cardYear, ccv, nameOnCard);
-    await checkoutPage.checkEmail(email);
-    await checkoutPage.selectCountry(country);
+    await checkoutPage.insertDataPayment(dataPayment.creditCard, dataPayment.cardMonth, dataPayment.cardYear, dataPayment.ccv, dataPayment.nameOnCard);
+    await checkoutPage.checkEmail(dataOrder.email);
+    await checkoutPage.selectCountry(dataOrder.country);
 
     await checkoutPage.placeOrder();
 
