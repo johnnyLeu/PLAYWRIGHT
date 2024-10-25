@@ -3,9 +3,11 @@ const {POManager} = require('../PageObjectModel/POManager');
 // Otteniamo i dati da un file esterno e lo convertiamo da file JSON ad oggetto JS 
 // JS OBJECT <- STRING <- JSON
 const dataOrder = JSON.parse(JSON.stringify(require("../Utils/PlaceOrderTestData.json")));
-const dataPayment = JSON.parse(JSON.stringify(require("../Utils/PaymentsData.json")));
+const data = JSON.parse(JSON.stringify(require("../Utils/PaymentsData.json")));
 
-test.only('Raulshetty Client App Buy Products Playwright Test', async ({page}) => { 
+for(const data of dataOrder) {
+
+test(`Buy product (${data.productName}), Pom Manager Playwrigth Test `, async ({page}) => { 
     const poManager = new POManager(page);
     const cartPage = poManager.getCartPage();
     const loginPage = poManager.getLoginPage(); 
@@ -16,17 +18,17 @@ test.only('Raulshetty Client App Buy Products Playwright Test', async ({page}) =
     const ordersPage = poManager.getOrdersPage();
 
     await loginPage.goToLoginPage();
-    await loginPage.loginProcess(dataOrder.email, dataOrder.passsword);
+    await loginPage.loginProcess(data.email, data.passsword);
 
-    await dashboardPage.searchAddProduct(dataOrder.zaraProduct);
+    await dashboardPage.searchAddProduct(data.productName);
     await navbar.clickCartBtn();
 
-    await cartPage.checkProduct(dataOrder.zaraProduct);
+    await cartPage.checkProduct(data.productName);
     await cartPage.goToCheckout();
 
-    await checkoutPage.insertDataPayment(dataPayment.creditCard, dataPayment.cardMonth, dataPayment.cardYear, dataPayment.ccv, dataPayment.nameOnCard);
-    await checkoutPage.checkEmail(dataOrder.email);
-    await checkoutPage.selectCountry(dataOrder.country);
+    await checkoutPage.insertdata(data.creditCard, data.cardMonth, data.cardYear, data.ccv, data.nameOnCard);
+    await checkoutPage.checkEmail(data.email);
+    await checkoutPage.selectCountry(data.country);
 
     await checkoutPage.placeOrder();
 
@@ -44,7 +46,7 @@ test.only('Raulshetty Client App Buy Products Playwright Test', async ({page}) =
     await page.pause();
 });
     
-
+}
 
  
  
