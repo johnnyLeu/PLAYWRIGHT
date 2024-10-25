@@ -3,11 +3,11 @@ const {POManager} = require('../PageObjectModel/POManager');
 // Otteniamo i dati da un file esterno e lo convertiamo da file JSON ad oggetto JS 
 // JS OBJECT <- STRING <- JSON
 const dataOrder = JSON.parse(JSON.stringify(require("../Utils/PlaceOrderTestData.json")));
-const data = JSON.parse(JSON.stringify(require("../Utils/PaymentsData.json")));
+const dataPayment = JSON.parse(JSON.stringify(require("../Utils/PaymentsData.json")));
 
-for(const data of dataOrder) {
+for(const dato of dataOrder) {
 
-test(`Buy product (${data.productName}), Pom Manager Playwrigth Test `, async ({page}) => { 
+test(`Buy product (${dato.productName}), Pom Manager Playwrigth Test `, async ({page}) => { 
     const poManager = new POManager(page);
     const cartPage = poManager.getCartPage();
     const loginPage = poManager.getLoginPage(); 
@@ -18,17 +18,17 @@ test(`Buy product (${data.productName}), Pom Manager Playwrigth Test `, async ({
     const ordersPage = poManager.getOrdersPage();
 
     await loginPage.goToLoginPage();
-    await loginPage.loginProcess(data.email, data.passsword);
+    await loginPage.loginProcess(dato.email, dato.passsword);
 
-    await dashboardPage.searchAddProduct(data.productName);
+    await dashboardPage.searchAddProduct(dato.productName);
     await navbar.clickCartBtn();
 
-    await cartPage.checkProduct(data.productName);
+    await cartPage.checkProduct(dato.productName);
     await cartPage.goToCheckout();
 
-    await checkoutPage.insertdata(data.creditCard, data.cardMonth, data.cardYear, data.ccv, data.nameOnCard);
-    await checkoutPage.checkEmail(data.email);
-    await checkoutPage.selectCountry(data.country);
+    await checkoutPage.insertDataPayment(dataPayment.creditCard, dataPayment.cardMonth, dataPayment.cardYear, dataPayment.ccv, dataPayment.nameOnCard);
+    await checkoutPage.checkEmail(dato.email);
+    await checkoutPage.selectCountry(dato.country);
 
     await checkoutPage.placeOrder();
 

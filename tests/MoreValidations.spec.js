@@ -1,5 +1,9 @@
 const {test, expect} = require('@playwright/test'); 
 
+// per lanciare tutti i test in parallelo usa: 
+// test.describe.configure({mode:'parallel'}); 
+// oppure 'serial' quando abbiamo test dipendenti l'un l'altro. 
+// Così se uno fallisce non eseguirà gli altri test.
 test("Pop-up validations", async ({page}) => {
 
     await page.goto("https://rahulshettyacademy.com/AutomationPractice/");

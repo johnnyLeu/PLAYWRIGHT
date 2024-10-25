@@ -5,7 +5,7 @@ const { text } = require('stream/consumers');
 
 // istanza di una singola pagina
 // PAGE da un context e una nuova pagina di default
-test('Raulshetty Client Login Playwright Test', async function({browser}) { 
+test.skip('Raulshetty Client Login Playwright Test', async function({browser}) { 
 
     const context = await browser.newContext();
     const page = await context.newPage();
