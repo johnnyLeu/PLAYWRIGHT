@@ -31,9 +31,7 @@ class APIutils {
             },
         });
         const orderResponseJson = await createOrderResponse.json(); 
-        const orderId = orderResponseJson[0];
-        console.log(orderId);
-        response.orderId = orderId;
+        response.orderId = orderResponseJson.orders[0];
 
         return response;
     }

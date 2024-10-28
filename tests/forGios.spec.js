@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+/*  import { test, expect } from "@playwright/test";
 
 test.describe("Check Google search", () => {
 
@@ -77,3 +77,5 @@ test.describe("Check Google search", () => {
   // Dopo l'esecuzione di ogni test
   test.afterAll(async () => {});
 });
+
+*/

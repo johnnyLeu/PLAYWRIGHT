@@ -1,4 +1,5 @@
 // @ts-check
+// JENKINS CREDENTIAL:ADMIN - fd8748b3b56e40849df4ca1aba005993
 const { devices } = require('@playwright/test');
 
   const config = {
@@ -18,8 +19,8 @@ const { devices } = require('@playwright/test');
     
     browserName: 'chromium',
     headless: false,
-    screenshot: 'only-on-failure', // on, off
-    trace: 'retain-on-failure', // on, off
+    screenshot: 'off', // on, only-on-failure
+    trace: 'off', // on, retain-on-failure
   },
 
 };

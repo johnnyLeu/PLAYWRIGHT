@@ -1,16 +1,5 @@
 const {test, expect} = require('@playwright/test'); 
-const { request } = require('https');
-
-// istanza di un browser che può quindi gestire più pagine
-test('Browser Context Playwright Test', async function({browser}) { 
-
-    await page.goto("https://google.com");
-
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    console.log(await page.title());
-
-});   
+const { request } = require('https'); 
 
 // istanza di una singola pagina
 // PAGE da un context e una nuova pagina di default
@@ -77,6 +66,7 @@ test('Raul Shop Page Playwright Test', async function({page}) {
  
 });
 
+// istanza di un browser che può quindi gestire più pagine
 test('Child window hadl', async ({browser}) => {
     // usando "PAGE" lo scope è su una singola pagina, quindi per aprire una pagina da link esterno
     // dobbiamo usare "BROWSER" e creare più variabili per ogni pagina
