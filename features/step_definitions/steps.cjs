@@ -40,6 +40,7 @@ When('Enter valid data payments with email {string}, country {string}, credit ca
 Then('Verify that the info in the confirmation order page are correct', async function () {
     const confirmOrderPage = this.poManager.getConfirmOrderPage();  
     await confirmOrderPage.checkItemsId(this.itemsId);
+    this.ordersId = await confirmOrderPage.getOrderIds(); 
     await confirmOrderPage.checkThanks();   
 });
 
@@ -49,14 +50,11 @@ When('Go to Order History Page', async function () {
 });
  
 Then('Verify that the order is in History', {timeout: 100*1000}, async function () {
-    const confirmOrderPage = this.poManager.getConfirmOrderPage();  
-    const ordersPage = this.poManager.getOrdersPage();
-    const ordersId = await confirmOrderPage.getOrderIds();  
-    const isOrderInHistory = await ordersPage.clickOnOrderById(ordersId);
+    const ordersPage = this.poManager.getOrdersPage(); 
     
     /// Itera su ogni ID per verificarne la presenza nella cronologia
-    for (const orderId of ordersId) {
-        const isOrderInHistory = await ordersPage.clickOnOrderById(orderId);
+    for (const orderId of this.ordersId) {
+        const isOrderInHistory = await ordersPage.clickOnOrderById(this.ordersId);
         
         // Controllo se isOrderInHistory è vero
         if (!isOrderInHistory) {
