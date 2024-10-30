@@ -1,5 +1,5 @@
 const {test, expect} = require('@playwright/test');  
-const {POManager} = require('../PageObjectModel/POManager');
+const {POManager} = require('../PageObjectModel/POManager.cjs');
 // Otteniamo i dati da un file esterno e lo convertiamo da file JSON ad oggetto JS 
 // JS OBJECT <- STRING <- JSON
 const dataOrder = JSON.parse(JSON.stringify(require("../Utils/PlaceOrderTestData.json")));

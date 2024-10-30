@@ -1,10 +1,10 @@
-const {LoginPage} = require('../PageObjectModel/LoginPage');
-const {DashboardPage} = require('../PageObjectModel/DashboardPage');
-const {CartPage} = require('../PageObjectModel/CartPage');
-const {Navbar} = require('../PageObjectModel/Navbar');
-const {CheckoutPage} = require('../PageObjectModel/CheckoutPage');
-const {ConfirmOrderPage} = require('../PageObjectModel/ConfirmOrderPage');
-const {OrdersPage} = require('../PageObjectModel/OrdersPage');
+const {LoginPage} = require('./LoginPage.cjs');
+const {DashboardPage} = require('./DashboardPage.cjs');
+const {CartPage} = require('./CartPage.cjs');
+const {Navbar} = require('./Navbar.cjs');
+const {CheckoutPage} = require('./CheckoutPage.cjs');
+const {ConfirmOrderPage} = require('./ConfirmOrderPage.cjs');
+const {OrdersPage} = require('./OrdersPage.cjs');
 
 class POManager {
 

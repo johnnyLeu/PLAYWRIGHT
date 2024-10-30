@@ -1,7 +1,6 @@
-import { When, Then, Given } from '@cucumber/cucumber';
-import POManager from '../../PageObjectModel/POManager.js';
-import expect from '@playwright/test'; 
-import { chromium } from '@playwright/test';
+const { When, Then, Given } = require('@cucumber/cucumber');
+const POManager = require('../../PageObjectModel/POManager.cjs');
+const { chromium } = require('@playwright/test');
 
 // Write code here that turns the phrase belowe into concrete actions
 Given('A login to E-commerce application with {string} and {string}', async function (email, passsword) {
