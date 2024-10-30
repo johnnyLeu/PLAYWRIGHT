@@ -1,4 +1,4 @@
-const { expect, selectors } = require("playwright/test");
+const { expect, selectors } = require("@playwright/test");
 
 class CheckoutPage {
 
