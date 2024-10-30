@@ -36,4 +36,4 @@ class OrdersPage {
 
 }
 
-module.exports = {OrdersPage};
+module.exports = OrdersPage;

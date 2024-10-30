@@ -11,7 +11,7 @@ class ConfirmOrderPage {
     }
 
     async getOrderIds() {
-        await this.orderIds.waitFor();
+        await this.page.waitForSelector('.em-spacer-1 .ng-star-inserted');
         const count = await this.orderIds.count();
         const orderIdsArray = [];
 
@@ -71,4 +71,4 @@ class ConfirmOrderPage {
 
 }
 
-module.exports = {ConfirmOrderPage};
+module.exports = ConfirmOrderPage;

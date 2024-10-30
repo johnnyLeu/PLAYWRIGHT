@@ -42,4 +42,4 @@ class CheckoutPage {
 
 }
 
-module.exports = {CheckoutPage};
+module.exports = CheckoutPage;

@@ -1,10 +1,10 @@
-const {LoginPage} = require('./LoginPage.cjs');
-const {DashboardPage} = require('./DashboardPage.cjs');
-const {CartPage} = require('./CartPage.cjs');
-const {Navbar} = require('./Navbar.cjs');
-const {CheckoutPage} = require('./CheckoutPage.cjs');
-const {ConfirmOrderPage} = require('./ConfirmOrderPage.cjs');
-const {OrdersPage} = require('./OrdersPage.cjs');
+const LoginPage = require('./LoginPage.cjs');
+const DashboardPage = require('./DashboardPage.cjs');
+const CartPage = require('./CartPage.cjs');
+const Navbar = require('./Navbar.cjs');
+const CheckoutPage = require('./CheckoutPage.cjs');
+const ConfirmOrderPage = require('./ConfirmOrderPage.cjs');
+const OrdersPage = require('./OrdersPage.cjs');
 
 class POManager {
 
@@ -48,4 +48,4 @@ class POManager {
     }
 }
 
-module.exports = {POManager};
+module.exports = POManager;

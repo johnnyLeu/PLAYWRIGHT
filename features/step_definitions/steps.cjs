@@ -49,13 +49,19 @@ When('Go to Order History Page', async function () {
 });
  
 Then('Verify that the order is in History', {timeout: 100*1000}, async function () {
+    const confirmOrderPage = this.poManager.getConfirmOrderPage();  
     const ordersPage = this.poManager.getOrdersPage();
-    const ordersId = await this.confirmOrderPage.getOrderIds();  
+    const ordersId = await confirmOrderPage.getOrderIds();  
     const isOrderInHistory = await ordersPage.clickOnOrderById(ordersId);
     
-    // Controllo se isOrderInHistory è vero
-    if (!isOrderInHistory) {
-        throw new Error(`Order ID ${ordersId} not found in order history.`);
-    } 
+    /// Itera su ogni ID per verificarne la presenza nella cronologia
+    for (const orderId of ordersId) {
+        const isOrderInHistory = await ordersPage.clickOnOrderById(orderId);
+        
+        // Controllo se isOrderInHistory è vero
+        if (!isOrderInHistory) {
+            throw new Error(`Order ID ${orderId} not found in order history.`);
+        } 
+    }
 });
 

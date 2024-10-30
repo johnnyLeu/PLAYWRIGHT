@@ -2,7 +2,7 @@ class LoginPage {
     
     constructor(page) {
         this.page = page;
-        this.signinButton = page.getByRole("button", {name: "Login"});;
+        this.signinButton = page.locator('#login')
         this.mailBox = page.getByPlaceholder("email@example.com");
         this.passwordBox = page.getByPlaceholder("enter your passsword"); 
     }
@@ -20,4 +20,4 @@ class LoginPage {
 
 }
 
-module.exports = {LoginPage};
+module.exports = LoginPage;
