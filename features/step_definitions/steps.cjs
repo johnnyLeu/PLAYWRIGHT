@@ -38,9 +38,10 @@ When('Enter valid data payments with email {string}, country {string}, credit ca
 });
 
 Then('Verify that the info in the confirmation order page are correct', async function () {
-    const confirmOrderPage = this.poManager.getConfirmOrderPage();  
-    await confirmOrderPage.checkItemsId(this.itemsId);
-    this.ordersId = await confirmOrderPage.getOrderIds(); 
+    const confirmOrderPage = this.poManager.getConfirmOrderPage(); 
+    this.ordersId = await confirmOrderPage.getOrderIds();
+    console.log("Order IDs from Confirm Order Page: ", this.ordersId); 
+    await confirmOrderPage.checkItemsId(this.itemsId);   
     await confirmOrderPage.checkThanks();   
 });
 
