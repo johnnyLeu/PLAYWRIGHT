@@ -5,7 +5,7 @@ const { devices } = require('@playwright/test');
   const config = {
     testDir: './tests',
     // if the tests fail this option re-run it again , N times
-    retries: 2,
+    // retries: 2,
     // Maximum time one test can run for
     timeout: 30 * 1000,
     expect: {

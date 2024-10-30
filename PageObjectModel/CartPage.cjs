@@ -7,6 +7,21 @@ class CartPage {
         this.itemsId = page.locator('.itemNumber');
     } 
 
+    async getItemsId() {
+        await this.itemsId.waitFor();
+        const count = await this.itemsId.count();
+        const itemsIdArray = [];
+
+        for (let i = 0; i < count; i++) {
+            let itemId = await this.itemsId.nth(i).textContent();
+            itemId = itemId.replace(/#/g, ''); // Rimuove il cancelletto '#'
+            itemId = itemId.replace(/[| ]/g, '').trim();  // Rimuove sia i delimitatori '|' che eventuali spazi
+            itemsIdArray.push(itemId);
+        }
+
+        return itemsIdArray;
+    } 
+
     async checkProduct(productName) {
         await this.cartProducts.waitFor();   
         const cartProductsFilter = await this.cartProducts.filter(product => product.includes(productName)).allTextContents();

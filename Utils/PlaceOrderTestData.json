@@ -5,17 +5,5 @@
         "productName" : "ZARA COAT 3",
         "productsArray" : ["ADIDAS ORIGINAL", "ZARA COAT 3", "IPHONE 13 PRO"],
         "country" : "Italy"  
-    },
-    {
-        "email" : "flameman19@gmail.com",
-        "passsword" : "Iamking@000",
-        "productName" : "ADIDAS ORIGINAL",
-        "country" : "Italy"  
-    },
-    {
-        "email" : "flameman19@gmail.com",
-        "passsword" : "Iamking@000",
-        "productName" : "IPHONE 13 PRO",
-        "country" : "Italy"  
     }
 ]

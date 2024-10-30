@@ -10,7 +10,7 @@ class DashboardPage {
 
     async searchAddProduct(productName) { 
         const titles = await this.productsText.allTextContents();
-        console.log(titles);    
+        console.log("List of available products: ", titles);    
         await this.products.filter({hasText: productName}).getByRole('button', {name: " Add To Cart"}).click();
     }
 

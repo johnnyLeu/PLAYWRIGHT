@@ -11,8 +11,8 @@ class ConfirmOrderPage {
     }
 
     async getOrderIds() {
-        await this.page.waitForSelector('.em-spacer-1 .ng-star-inserted');
-         const count = await this.orderIds.count();
+        await this.orderIds.waitFor();
+        const count = await this.orderIds.count();
         const orderIdsArray = [];
 
         for (let i = 0; i < count; i++) {
@@ -22,18 +22,37 @@ class ConfirmOrderPage {
         }
 
         return orderIdsArray;
-
     }
 
-    async checkOrderIds(orderIds) {
+    /* async checkOrderIds(orderIds) {
         const count = await this.orderIds.count();
         for(let i = 0; i < count; i++) {
             let orderText = await this.orderIds.nth(i).textContent();
-            orderText = orderText.replace(/[| ]/g, '').trim();  // Rimuove sia i delimitatori '|' che eventuali spazi
+            orderText = orderText.replace(/[| ]/g, '').trim();  // Rimuove sia i delimitatori '|', che eventuali spazi
             expect(orderIds).toContain(orderText);  
         }
-    }    
+    } */
+
+    async checkItemsId(itemsId) {    
+        const count = await this.orderIds.count();
+        for (let i = 0; i < count; i++) {
+            let orderText = await this.orderIds.nth(i).textContent();
+            orderText = orderText.replace(/[| ]/g, '').trim(); // Rimuove delimitatori e spazi
+            console.log(orderText);
+            console.log(itemsId);
     
+            if (itemsId === orderText) {
+                console.log("ID corrispondente");
+                return true;  
+            } else {
+                console.log("ID non corrispondente");
+            }
+        }
+        return false; 
+    }
+        
+         
+
     async checkThanks() {
         await expect(this.thanks4order).toBeVisible();
     }
